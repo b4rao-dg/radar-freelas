@@ -207,7 +207,11 @@ def enviar_telegram(token: str, chat_id: str, mensagem: str) -> None:
         },
         timeout=30,
     )
-    resposta.raise_for_status()
+    if not resposta.ok:
+        # O Telegram explica o motivo no campo "description" (ex.: "chat not found").
+        # Mostramos só ele, porque a URL do erro padrão contém o token.
+        motivo = resposta.json().get("description", resposta.text)
+        raise RuntimeError(f"Telegram recusou a mensagem ({resposta.status_code}): {motivo}")
 
 
 # ---------------------------------------------------------------------------
