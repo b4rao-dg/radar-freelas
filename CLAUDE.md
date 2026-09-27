@@ -20,8 +20,9 @@ Robô em Python que busca projetos novos no **99Freelas** e no **Workana**, filt
 - [x] Testado baixando as páginas de verdade (26/09/2026): 99Freelas 20 projetos (2 págs.), Workana 23 (3 págs., vêm de 7 a 9 por página), sem 403. As datas do 99Freelas vêm vazias no HTML (timestamp em ms no atributo `cp-datetime`, que um JS preenche no navegador); agora `preencher_datas_99freelas` converte isso em Python.
 - [x] Bot criado no @BotFather e chat id obtido com `configurar_telegram.py` (mensagem de teste chegou). O token foi trocado com `/revoke` porque vazou no histórico do PowerShell.
 - [x] `radar.yml` movido para `.github/workflows/` (estava na raiz, e o Actions não acharia)
-- [ ] `git init`, criar repositório **público** no GitHub, subir e cadastrar os secrets `TELEGRAM_TOKEN` e `TELEGRAM_CHAT_ID`
-- [ ] Rodar o workflow manualmente (Run workflow) e conferir se chegou no Telegram
+- [x] Repositório público https://github.com/b4rao-dg/radar-freelas criado com o `gh` (instalado via .zip em `%LOCALAPPDATA%\Programs\gh\bin`, já que não há winget) e secrets `TELEGRAM_TOKEN` e `TELEGRAM_CHAT_ID` cadastrados
+- [x] Workflow rodado manualmente em 27/09/2026: mensagens chegaram no Telegram e o `vistos.json` foi salvo pelo robô. **Antes de mexer no código, rode `git pull`**, porque o robô faz commits sozinho.
+- Obs.: nos terminais do usuário, `python`, `git` e `gh` às vezes não são achados no PATH. Passe o caminho completo (ex.: `& "C:\Users\barao\AppData\Local\Programs\Python\Python312\python.exe"`).
 
 ## Ideias para depois
 - Rascunho de proposta com IA gratuita (Gemini / Google AI Studio, cota grátis). Nunca enviar propostas automaticamente.
