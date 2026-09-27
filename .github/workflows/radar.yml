@@ -1,0 +1,36 @@
+name: Radar de Freelas
+
+on:
+  schedule:
+    # Horários em UTC. 11h, 17h e 23h UTC = 8h, 14h e 20h em Brasília.
+    - cron: "7 11,17,23 * * *"
+  workflow_dispatch: {}   # permite rodar na mão pela aba Actions
+
+permissions:
+  contents: write         # para salvar o vistos.json de volta no repositório
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Buscar projetos e avisar no Telegram
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python buscador.py
+
+      - name: Salvar projetos já vistos
+        run: |
+          git config user.name "radar-bot"
+          git config user.email "radar-bot@users.noreply.github.com"
+          git add vistos.json
+          git diff --cached --quiet || git commit -m "Atualiza projetos vistos"
+          git push

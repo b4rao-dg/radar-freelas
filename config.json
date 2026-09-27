@@ -1,0 +1,16 @@
+{
+  "99freelas": { "ativo": true, "categoria": "web-mobile-e-software", "paginas": 2 },
+  "workana":   { "ativo": true, "categoria": "it-programming", "paginas": 3 },
+
+  "palavras_incluir": [
+    "python", "automacao", "automatizar", "bot", "robo", "scraping", "raspagem",
+    "selenium", "planilha", "excel", "django", "script", "html", "javascript",
+    "landing page", "sql", "api", "integracao"
+  ],
+
+  "palavras_excluir": [
+    "abap", "sap", "senior", "5+ anos", "wordpress", "shopify"
+  ],
+
+  "maximo_por_execucao": 15
+}
