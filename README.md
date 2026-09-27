@@ -1,6 +1,7 @@
 # 🛰️ Radar de Freelas
 
 [![Radar de Freelas](https://github.com/b4rao-dg/radar-freelas/actions/workflows/radar.yml/badge.svg)](https://github.com/b4rao-dg/radar-freelas/actions/workflows/radar.yml)
+[![Testes](https://github.com/b4rao-dg/radar-freelas/actions/workflows/testes.yml/badge.svg)](https://github.com/b4rao-dg/radar-freelas/actions/workflows/testes.yml)
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![Custo](https://img.shields.io/badge/custo-R%24%200-2ea44f)
 
@@ -43,7 +44,7 @@ flowchart LR
 
 ## Tecnologias
 
-Python 3.12 · requests · BeautifulSoup4 · expressões regulares · API de bots do Telegram · GitHub Actions (cron)
+Python 3.12 · requests · BeautifulSoup4 · expressões regulares · pytest · API de bots do Telegram · GitHub Actions (cron e CI)
 
 ## Estrutura
 
@@ -52,9 +53,22 @@ Python 3.12 · requests · BeautifulSoup4 · expressões regulares · API de bot
 ├── configurar_telegram.py   # ajudante para descobrir o chat id e testar o bot
 ├── config.json              # palavras-chave e opções
 ├── vistos.json              # projetos já avisados (atualizado pelo robô)
+├── tests/
+│   ├── test_buscador.py     # 23 testes com pytest
+│   └── exemplos/            # HTMLs de exemplo com a estrutura dos sites
 └── .github/workflows/
-    └── radar.yml            # agendamento no GitHub Actions
+    ├── radar.yml            # agendamento no GitHub Actions
+    └── testes.yml           # roda os testes a cada push
 ```
+
+## Testes
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest -v
+```
+
+Os testes cobrem os leitores dos dois sites, o filtro de palavras-chave e a montagem da mensagem do Telegram. Eles usam páginas de exemplo salvas em `tests/exemplos/`, com a mesma estrutura dos sites reais, então rodam sem internet e sempre dão o mesmo resultado. A cada push, o GitHub Actions roda tudo de novo (selo "Testes" no topo).
 
 ## Como usar
 
@@ -105,7 +119,7 @@ Tudo fica no `config.json`:
 
 ## Próximos passos
 
-- [ ] Testes automatizados com `pytest` para os leitores de página
+- [x] Testes automatizados com `pytest` e CI no GitHub Actions
 - [ ] Filtrar por orçamento mínimo
 - [ ] Gerar um rascunho de proposta com IA (API gratuita do Gemini)
 

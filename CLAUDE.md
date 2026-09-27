@@ -27,5 +27,5 @@ Robô em Python que busca projetos novos no **99Freelas** e no **Workana**, filt
 ## Ideias para depois
 - Rascunho de proposta com IA gratuita (Gemini / Google AI Studio, cota grátis). Nunca enviar propostas automaticamente.
 - Filtro por orçamento mínimo
-- Testes com `pytest` para `ler_99freelas` e `ler_workana`, usando HTML de exemplo salvo em `tests/`
+- ~~Testes com `pytest`~~ feito em 27/09/2026: `tests/test_buscador.py` (23 testes), com HTMLs inventados mas de estrutura fiel em `tests/exemplos/` (não salvar páginas reais: têm conteúdo de terceiros). CI em `.github/workflows/testes.yml`. Se o site mudar de estrutura, atualize primeiro o exemplo e depois o leitor.
 - Caprichar no README para o portfólio (print da mensagem no Telegram, GIF)

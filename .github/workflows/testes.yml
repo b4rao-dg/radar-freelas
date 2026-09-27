@@ -1,0 +1,22 @@
+name: Testes
+
+# Roda os testes a cada push e pull request. Se algum falhar, o GitHub marca o commit com um X.
+on:
+  push:
+    paths-ignore:
+      - "vistos.json"     # o commit automático do robô não mexe em código
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements-dev.txt
+
+      - run: python -m pytest -v
