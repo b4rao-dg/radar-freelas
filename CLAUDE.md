@@ -1,7 +1,7 @@
 # Radar de Freelas — contexto para o Claude Code
 
 ## O que é
-Robô em Python que busca projetos novos no **99Freelas** e no **Workana**, filtra por palavras-chave (`config.json`) e avisa no **Telegram**. Deve rodar de graça no **GitHub Actions** (`.github/workflows/radar.yml`, 3x/dia: 8h, 14h e 20h de Brasília).
+Robô em Python que busca projetos novos no **99Freelas** e no **Workana**, filtra por palavras-chave (`config.json`) e avisa no **Telegram**. Deve rodar de graça no **GitHub Actions** (`.github/workflows/radar.yml`, de hora em hora das 7h às 23h de Brasília).
 
 ## Sobre o usuário
 - Está começando em programação: estudou lógica em Python/JS/HTML e um pouco de SQL, e faz um curso de Python na Udemy.
@@ -23,6 +23,8 @@ Robô em Python que busca projetos novos no **99Freelas** e no **Workana**, filt
 - [x] Repositório público https://github.com/b4rao-dg/radar-freelas criado com o `gh` (instalado via .zip em `%LOCALAPPDATA%\Programs\gh\bin`, já que não há winget) e secrets `TELEGRAM_TOKEN` e `TELEGRAM_CHAT_ID` cadastrados
 - [x] Workflow rodado manualmente em 27/09/2026: mensagens chegaram no Telegram e o `vistos.json` foi salvo pelo robô. **Antes de mexer no código, rode `git pull`**, porque o robô faz commits sozinho.
 - Obs.: nos terminais do usuário, `python`, `git` e `gh` às vezes não são achados no PATH. Passe o caminho completo (ex.: `& "C:\Users\barao\AppData\Local\Programs\Python\Python312\python.exe"`).
+
+- [x] 27/10/2026: o usuário passou a focar em **gestão de tráfego pago (Meta Ads)**. `config.json` agora usa `categorias` (lista) por site: 99Freelas `web-mobile-e-software` + `vendas-e-marketing`, Workana `it-programming` + `sales-marketing`, com palavras de tráfego (trafego, meta ads, facebook ads, pixel, remarketing...) e "contingencia" nas excluídas. Cron passou para de hora em hora. `categorias_de()` mantém compatibilidade com o formato antigo `categoria`.
 
 ## Ideias para depois
 - Rascunho de proposta com IA gratuita (Gemini / Google AI Studio, cota grátis). Nunca enviar propostas automaticamente.

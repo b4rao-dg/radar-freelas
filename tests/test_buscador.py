@@ -13,6 +13,7 @@ import pytest
 from bs4 import BeautifulSoup
 
 from buscador import (
+    categorias_de,
     combina,
     ler_99freelas,
     ler_workana,
@@ -196,3 +197,19 @@ def test_mensagem_corta_descricao_longa_sem_cortar_palavra():
     trecho = msg.split("\n\n")[1]
     assert len(trecho) <= 601
     assert trecho.endswith("palavra…")
+
+
+# ---------------------------------------------------------------------------
+# Categorias
+# ---------------------------------------------------------------------------
+
+def test_categorias_aceita_lista():
+    assert categorias_de({"categorias": ["a", "b"]}) == ["a", "b"]
+
+
+def test_categorias_aceita_formato_antigo():
+    assert categorias_de({"categoria": "web-mobile-e-software"}) == ["web-mobile-e-software"]
+
+
+def test_categorias_vazio_sem_configuracao():
+    assert categorias_de({}) == []

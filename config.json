@@ -1,15 +1,18 @@
 {
-  "99freelas": { "ativo": true, "categoria": "web-mobile-e-software", "paginas": 2 },
-  "workana":   { "ativo": true, "categoria": "it-programming", "paginas": 3 },
+  "99freelas": { "ativo": true, "categorias": ["web-mobile-e-software", "vendas-e-marketing"], "paginas": 2 },
+  "workana":   { "ativo": true, "categorias": ["it-programming", "sales-marketing"], "paginas": 3 },
 
   "palavras_incluir": [
+    "trafego", "trafego pago", "gestor de trafego", "gestao de trafego",
+    "meta ads", "facebook ads", "instagram ads", "google ads", "anuncios", "anuncio",
+    "campanha", "campanhas", "pixel", "remarketing", "midia paga", "whatsapp", "chatbot",
     "python", "automacao", "automatizar", "bot", "robo", "scraping", "raspagem",
     "selenium", "planilha", "excel", "django", "script", "html", "javascript",
     "landing page", "sql", "api", "integracao"
   ],
 
   "palavras_excluir": [
-    "abap", "sap", "senior", "5+ anos", "wordpress", "shopify"
+    "abap", "sap", "senior", "5+ anos", "wordpress", "shopify", "contingencia"
   ],
 
   "maximo_por_execucao": 15

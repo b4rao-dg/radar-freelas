@@ -218,6 +218,13 @@ def enviar_telegram(token: str, chat_id: str, mensagem: str) -> None:
 # Programa principal
 # ---------------------------------------------------------------------------
 
+def categorias_de(opcoes: dict) -> list[str]:
+    """Aceita "categorias" (lista) ou o formato antigo "categoria" (texto)."""
+    if opcoes.get("categorias"):
+        return list(opcoes["categorias"])
+    return [opcoes["categoria"]] if opcoes.get("categoria") else []
+
+
 def main() -> None:
     modo_teste = "--teste" in sys.argv
     config = json.loads(ARQUIVO_CONFIG.read_text(encoding="utf-8"))
@@ -231,12 +238,13 @@ def main() -> None:
     for nome, funcao, opcoes in fontes:
         if not opcoes.get("ativo", True):
             continue
-        try:
-            achados = funcao(opcoes["categoria"], opcoes.get("paginas", 2))
-            print(f"{nome}: {len(achados)} projetos lidos")
-            projetos += achados
-        except Exception as erro:  # um site fora do ar não derruba o outro
-            print(f"{nome}: erro ao buscar -> {erro}")
+        for categoria in categorias_de(opcoes):
+            try:
+                achados = funcao(categoria, opcoes.get("paginas", 2))
+                print(f"{nome} ({categoria}): {len(achados)} projetos lidos")
+                projetos += achados
+            except Exception as erro:  # uma categoria fora do ar não derruba as outras
+                print(f"{nome} ({categoria}): erro ao buscar -> {erro}")
 
     novos = []
     for projeto in projetos:

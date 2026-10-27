@@ -2,8 +2,9 @@ name: Radar de Freelas
 
 on:
   schedule:
-    # Horários em UTC. 11h, 17h e 23h UTC = 8h, 14h e 20h em Brasília.
-    - cron: "7 11,17,23 * * *"
+    # Horários em UTC. De hora em hora, das 7h às 23h de Brasília
+    # (10h-23h e 0h-2h UTC). Quem manda proposta primeiro tem mais chance.
+    - cron: "7 0-2,10-23 * * *"
   workflow_dispatch: {}   # permite rodar na mão pela aba Actions
 
 permissions:

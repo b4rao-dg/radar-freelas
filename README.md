@@ -5,7 +5,7 @@
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![Custo](https://img.shields.io/badge/custo-R%24%200-2ea44f)
 
-Robô em Python que procura **projetos novos** no **99Freelas** e no **Workana**, filtra pelas palavras-chave que me interessam e me avisa no **Telegram**. Roda sozinho 3 vezes por dia no **GitHub Actions**, sem servidor e sem custo.
+Robô em Python que procura **projetos novos** no **99Freelas** e no **Workana**, filtra pelas palavras-chave que me interessam e me avisa no **Telegram**. Roda sozinho **de hora em hora** (das 7h às 23h) no **GitHub Actions**, sem servidor e sem custo.
 
 <p align="center">
   <img src="docs/telegram.png" alt="Projetos chegando no Telegram" width="420">
@@ -13,13 +13,13 @@ Robô em Python que procura **projetos novos** no **99Freelas** e no **Workana**
 
 ## Por que eu fiz
 
-Nas plataformas de freelas, quem manda proposta primeiro tem mais chance. Só que ficar atualizando duas páginas o dia inteiro atrás de projetos de Python e automação toma muito tempo. Então eu automatizei: o robô olha os sites por mim e só me chama quando aparece algo que combina comigo.
+Nas plataformas de freelas, quem manda proposta primeiro tem mais chance. Só que ficar atualizando duas páginas o dia inteiro atrás de projetos de tráfego pago, Python e automação toma muito tempo. Então eu automatizei: o robô olha os sites por mim e só me chama quando aparece algo que combina comigo.
 
 ## Como funciona
 
 ```mermaid
 flowchart LR
-    A["⏰ GitHub Actions<br/>8h, 14h e 20h"] --> B["buscador.py"]
+    A["⏰ GitHub Actions<br/>de hora em hora"] --> B["buscador.py"]
     B --> C["99Freelas<br/>lê o HTML"]
     B --> D["Workana<br/>lê o JSON da página"]
     C --> E{"Filtro de<br/>palavras-chave"}
@@ -38,7 +38,8 @@ flowchart LR
 
 - **Cada site entrega os dados de um jeito.** No 99Freelas os projetos estão no HTML. No Workana a lista visível é montada por JavaScript, então o robô lê o JSON que a página guarda no atributo `:results-initials` da tag `<search>`.
 - **Datas que só aparecem no navegador.** O 99Freelas manda a data como um timestamp em milissegundos (`cp-datetime="1790172174000"`) e usa JavaScript para escrever o texto. Como o `requests` não roda JavaScript, o robô converte o número com `datetime`.
-- **Fuso horário.** O GitHub Actions roda em UTC. O cron foi ajustado (`11,17,23` UTC = 8h, 14h e 20h em Brasília) e as datas são convertidas para -03:00.
+- **Fuso horário.** O GitHub Actions roda em UTC. O cron foi ajustado (`0-2,10-23` UTC = de hora em hora, das 7h às 23h em Brasília) e as datas são convertidas para -03:00.
+- **Várias categorias.** Os projetos de tráfego pago ficam na categoria de marketing, e os de programação em outra. O `config.json` aceita uma lista de categorias por site, e o robô junta tudo sem avisar o mesmo projeto duas vezes.
 - **Filtro sem falso positivo.** Uma busca simples por "sap" encontraria "whatsapp". O filtro usa expressão regular para achar só a palavra inteira, e ignora acentos e maiúsculas ("Automação" casa com "automacao").
 - **Segredos fora do código.** O token do bot fica nos *secrets* do GitHub e chega ao script como variável de ambiente. Quando o Telegram recusa uma mensagem, o erro mostra só o motivo, nunca a URL que contém o token.
 
@@ -54,7 +55,7 @@ Python 3.12 · requests · BeautifulSoup4 · expressões regulares · pytest · 
 ├── config.json              # palavras-chave e opções
 ├── vistos.json              # projetos já avisados (atualizado pelo robô)
 ├── tests/
-│   ├── test_buscador.py     # 23 testes com pytest
+│   ├── test_buscador.py     # 26 testes com pytest
 │   └── exemplos/            # HTMLs de exemplo com a estrutura dos sites
 └── .github/workflows/
     ├── radar.yml            # agendamento no GitHub Actions
